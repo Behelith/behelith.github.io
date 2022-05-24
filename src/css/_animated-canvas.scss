@@ -1,0 +1,55 @@
+@use "./colors";
+
+.animated-canvas {
+  background-color: colors.$background;
+  transition: background-color 0.2s;
+  // border: 1px solid colors.$highlight-contrast;
+  // background: linear-gradient(
+  //   60deg,
+  //   colors.$background,
+  //   colors.$background-dark
+  // );
+
+  position: fixed;
+  top: 0;
+  // background-color: #000;
+  width: 100vw;
+  height: 100vh;
+  // height: 200px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.animated-canvas-temp {
+  border: 1px solid colors.$highlight-contrast;
+
+  background: linear-gradient(
+    60deg,
+    colors.$background 40%,
+    colors.$background-contrast 41%
+  );
+
+  position: fixed;
+  top: 0;
+  background-color: #0008;
+  width: 100vw;
+  // height: 100vh;
+  height: 300px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.animated-canvas-controls-temp {
+  // border: 1px solid colors.$highlight;
+  z-index: 22;
+}
+
+.animated-canvas-controls {
+  // border: 1px solid colors.$highlight;
+  // padding: 1em 0.5em;
+
+  // position: fixed;
+  // z-index: 100;
+  width: 100%;
+  flex: 1;
+}

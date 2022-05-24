@@ -1,0 +1,21 @@
+@use "colors";
+
+.dbg-border {
+  border: 1px dotted colors.$highlight-contrast;
+}
+
+.fade-in {
+  animation: fade-in 0.5s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translatey(-0.5em);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}

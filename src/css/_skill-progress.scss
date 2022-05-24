@@ -1,0 +1,48 @@
+@use "./colors";
+@use "./media";
+
+.skill-progress-container {
+  padding: 2em 0;
+}
+
+.skill-progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2em;
+  grid-row-gap: 2em;
+
+  @include media.max {
+    grid-column-gap: 5em;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.skill-progress {
+  display: flex;
+
+  & > div {
+    border: 1px solid colors.$highlight-contrast;
+    height: 4px;
+    flex: 1;
+    // display: inline-block;
+
+    &.on {
+      border: 1px solid colors.$highlight;
+      background-color: colors.$highlight;
+    }
+
+    & + div {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+.skill-progress-label {
+  &::before {
+    content: ">";
+    font-weight: bold;
+    color: colors.$highlight;
+    color: colors.$highlight-contrast;
+    margin-right: 0.5em;
+  }
+}

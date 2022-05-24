@@ -1,0 +1,444 @@
+:root {
+  --none: hsla(0, 0%, 0%, 0);
+}
+:root .light_ {
+  --background: hsla(333, 21%, 92%, 1);
+  --background-contrast: hsl(220, 15%, 20%);
+  --background-dark: hsl(333, 21%, 85%);
+  --text: hsl(220, 15%, 20%);
+  --text-contrast: hsl(333, 21%, 92%);
+  --highlight: hsl(8, 67%, 52%);
+  --highlight-contrast: hsl(187, 61%, 74%);
+}
+:root .light2 {
+  --background: hsla(333, 21%, 92%, 1);
+  --background-contrast: hsla(333, 21%, 90%, 1);
+  --background-dark: hsl(333, 21%, 85%);
+  --text: hsl(220, 15%, 40%);
+  --text-contrast: hsl(220, 15%, 30%);
+  --highlight: hsl(8, 67%, 52%);
+  --highlight-contrast: hsl(187, 61%, 65%);
+}
+:root .dark {
+  --background: #222;
+  --background-contrast: hsl(0, 0%, 15%);
+  --background-dark: hsl(333, 21%, 85%);
+  --text: #eee;
+  --text-contrast: #eee;
+  --highlight: #94dce5;
+  --highlight-contrast: #d74833;
+}
+:root .light {
+  --background: #eee;
+  --background-contrast: #312f2f;
+  --text: #22181c;
+  --text-contrast: #ef626c;
+  --highlight: hsl(187, 61%, 64%);
+  --highlight-contrast: hsl(8, 67%, 62%);
+}
+:root .light2 {
+  --background: #f2f5ea;
+  --background-contrast: #2c363f;
+  --text: #2c363f;
+  --text-contrast: #2c363f;
+  --highlight: #f18f01;
+  --highlight-contrast: #e75a7c;
+}
+:root .dark2 {
+  --background: #2c363f;
+  --background-contrast: #f2f5ea;
+  --text: #f2f5ea;
+  --text-contrast: #2c363f;
+  --highlight: #f18f01;
+  --highlight-contrast: #e75a7c;
+}
+:root ._light {
+  --background: hsl(333, 21%, 92%);
+  --background-contrast: hsl(333, 21%, 90%);
+  --background-dark: hsl(333, 21%, 85%);
+  --text: #222;
+  --text-contrast: #222;
+  --highlight: hsl(8, 67%, 52%);
+  --highlight-contrast: #3982ab;
+}
+
+.min,
+.min-mid,
+.mid,
+.mid-max,
+.max {
+  display: none;
+}
+
+@media (max-width: 667px) {
+  .min {
+    display: initial;
+  }
+}
+@media (max-width: 993px) {
+  .min-mid {
+    display: initial;
+  }
+}
+@media (min-width: 667px) and (max-width: 993px) {
+  .mid {
+    display: initial;
+  }
+}
+@media (min-width: 667px) {
+  .mid-max {
+    display: initial;
+  }
+}
+@media (min-width: 993px) {
+  .max {
+    display: initial;
+  }
+}
+.dbg-border {
+  border: 1px dotted var(--highlight-contrast);
+}
+
+.fade-in {
+  animation: fade-in 0.5s forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translatey(-0.5em);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+.icon-button {
+  color: inherit;
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+  width: 48px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-button:hover {
+  color: var(--highlight-contrast);
+}
+.icon-button.active {
+  color: var(--highlight-contrast);
+}
+
+.page-label {
+  font-size: 2em;
+  color: var(--highlight-contrast);
+}
+
+.page-text {
+  width: 70%;
+  width: 60%;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+span {
+  display: none;
+  justify-content: center;
+  padding: 1em 0;
+  z-index: 10;
+}
+@media (min-width: 900px) {
+  span {
+    display: flex;
+  }
+}
+span.mobile {
+  padding: 0.5em 0;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+}
+@media (min-width: 900px) {
+  span.mobile {
+    display: none;
+  }
+}
+span.mobile a,
+span.mobile button {
+  padding: 0.5em 1em;
+}
+span button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+span a,
+span button {
+  padding: 1em 1em;
+  color: var(--highlight);
+  color: var(--text-contrast);
+  text-decoration: none;
+  transition: 0.2s, border-color 0.2s;
+  border-bottom: 2px solid var(--none);
+}
+span a + a,
+span button + a {
+  margin-left: 2px;
+}
+
+nav.app-nav {
+  position: fixed;
+  top: 0;
+  background-color: var(--background-contrast);
+  width: 100vw;
+  z-index: 5;
+  padding: 0.8em 0;
+  color: var(--highlight);
+}
+nav.app-nav button,
+nav.app-nav a {
+  color: inherit;
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+}
+nav.app-nav button:hover,
+nav.app-nav a:hover {
+  color: var(--highlight-contrast);
+}
+nav.app-nav button.active,
+nav.app-nav a.active {
+  color: var(--highlight-contrast);
+}
+
+.separator {
+  border: unset;
+  border-top: 1px solid var(--text-contrast);
+  width: 100%;
+}
+
+nav.app-nav.mobile {
+  transition: transform 0.2s;
+}
+nav.app-nav.mobile .app-nav-config {
+  right: 0.2em;
+  display: flex;
+}
+nav.app-nav.mobile .nav-content {
+  flex-direction: column;
+}
+nav.app-nav.mobile .toggle-button {
+  background-color: var(--background-contrast);
+  color: var(--highlight);
+  margin-right: auto;
+}
+nav.app-nav.mobile:hover {
+  transform: translateY(0%);
+}
+
+.nav-content {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+}
+.nav-content.centered {
+  justify-content: center;
+}
+.nav-content > * + * {
+  margin-left: 0.5em;
+}
+
+nav.app-nav.mobile .nav-content > * + * {
+  margin-left: 0.2em;
+}
+
+.skill-progress-container {
+  padding: 2em 0;
+}
+
+.skill-progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2em;
+  grid-row-gap: 2em;
+}
+@media (min-width: 993px) {
+  .skill-progress-grid {
+    grid-column-gap: 5em;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.skill-progress {
+  display: flex;
+}
+.skill-progress > div {
+  border: 1px solid var(--highlight-contrast);
+  height: 4px;
+  flex: 1;
+}
+.skill-progress > div.on {
+  border: 1px solid var(--highlight);
+  background-color: var(--highlight);
+}
+.skill-progress > div + div {
+  margin-left: 0.5em;
+}
+
+.skill-progress-label::before {
+  content: ">";
+  font-weight: bold;
+  color: var(--highlight);
+  color: var(--highlight-contrast);
+  margin-right: 0.5em;
+}
+
+.app-input {
+  display: flex;
+  flex-flow: column;
+}
+.app-input + .app-input {
+  margin-top: 1.5em;
+}
+
+.input-range {
+  position: relative;
+  border-top: 1px solid var(--highlight);
+  width: 100%;
+}
+.input-range .input-handler {
+  position: absolute;
+  top: 0;
+  background-color: var(--highlight);
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s, width 0.1s, height 0.1s;
+  user-select: none;
+}
+.input-range .input-handler:hover {
+  background-color: var(--highlight-contrast);
+  width: 24px;
+  height: 24px;
+}
+
+.input-wrapper {
+  height: 32px;
+  align-items: center;
+  display: flex;
+}
+
+.input-info {
+  display: flex;
+}
+.input-info .input-label {
+  margin: 0;
+  padding: 0;
+}
+.input-info .input-value {
+  color: var(--highlight-contrast);
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+}
+
+.animated-canvas {
+  background-color: var(--background);
+  transition: background-color 0.2s;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.animated-canvas-temp {
+  border: 1px solid var(--highlight-contrast);
+  background: linear-gradient(60deg, var(--background) 40%, var(--background-contrast) 41%);
+  position: fixed;
+  top: 0;
+  background-color: #0008;
+  width: 100vw;
+  height: 300px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.animated-canvas-controls-temp {
+  z-index: 22;
+}
+
+.animated-canvas-controls {
+  width: 100%;
+  flex: 1;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: var(--background);
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  color: var(--text);
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  z-index: -1;
+  margin-top: 3em;
+}
+
+.app-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+a.external-link {
+  color: var(--highlight);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+a.external-link:hover {
+  color: var(--highlight-contrast);
+}
+
+.app-footer {
+  margin: 3em 0;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.app-content {
+  padding: 1em 1.5em;
+  max-width: 900px;
+  margin: auto;
+  top: 0;
+}
+@media (max-width: 993px) {
+  .app-content {
+    padding: 1em 2.5em;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

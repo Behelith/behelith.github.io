@@ -1,0 +1,14 @@
+@use "./colors";
+@use "./button-styles";
+
+.page-label {
+  font-size: 2em;
+  color: colors.$highlight-contrast;
+}
+
+.page-text {
+  width: 70%;
+  width: 60%;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}

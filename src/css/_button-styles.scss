@@ -1,0 +1,45 @@
+@use "./colors";
+
+@mixin regular {
+  //   color: colors.$text-contrast;
+  color: inherit;
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+
+  &:hover {
+    color: colors.$highlight-contrast;
+    // border-bottom: 2px solid colors.$highlight-contrast;
+  }
+
+  &.active {
+    color: colors.$highlight-contrast;
+    // border-bottom: 2px solid colors.$highlight-contrast;
+  }
+}
+
+.icon-button {
+  @include regular;
+  width: 48px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin link {
+  color: colors.$highlight;
+  transition: color 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    color: colors.$highlight-contrast;
+  }
+}

@@ -1,0 +1,63 @@
+@use "colors";
+
+.app-input {
+  //   border: 1px solid colors.$highlight-contrast;
+  display: flex;
+  //   width: 100%;
+  flex-flow: column;
+
+  & + .app-input {
+    margin-top: 1.5em;
+  }
+}
+
+.input-range {
+  position: relative;
+  border-top: 1px solid colors.$highlight;
+  width: 100%;
+
+  .input-handler {
+    position: absolute;
+    top: 0;
+
+    background-color: colors.$highlight;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    transition: background-color 0.2s, width 0.1s, height 0.1s;
+
+    &:hover {
+      background-color: colors.$highlight-contrast;
+
+      width: 24px;
+      height: 24px;
+    }
+
+    user-select: none;
+  }
+}
+
+.input-wrapper {
+  height: 32px;
+  align-items: center;
+  display: flex;
+}
+
+.input-info {
+  display: flex;
+
+  .input-label {
+    margin: 0;
+    padding: 0;
+  }
+
+  .input-value {
+    color: colors.$highlight-contrast;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+  }
+}

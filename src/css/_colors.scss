@@ -1,0 +1,110 @@
+:root {
+  --none: hsla(0, 0%, 0%, 0);
+
+  // --background: hsl(220, 15%, 20%);
+  // --background-contrast: hsla(333, 21%, 92%, 1);
+  // --background-dark: hsl(220, 15%, 10%);
+
+  // --text: hsl(333, 21%, 92%);
+  // --text-contrast: hsl(220, 15%, 20%);
+
+  // --highlight: hsl(187, 61%, 74%);
+  // --highlight-contrast: hsl(8, 67%, 52%);
+
+  //basic
+  .light_ {
+    --background: hsla(333, 21%, 92%, 1);
+    --background-contrast: hsl(220, 15%, 20%);
+    --background-dark: hsl(333, 21%, 85%);
+
+    --text: hsl(220, 15%, 20%);
+    --text-contrast: hsl(333, 21%, 92%);
+
+    --highlight: hsl(8, 67%, 52%);
+    --highlight-contrast: hsl(187, 61%, 74%);
+  }
+
+  .light2 {
+    --background: hsla(333, 21%, 92%, 1);
+    --background-contrast: hsla(333, 21%, 90%, 1);
+    --background-dark: hsl(333, 21%, 85%);
+
+    --text: hsl(220, 15%, 40%);
+    --text-contrast: hsl(220, 15%, 30%);
+
+    --highlight: hsl(8, 67%, 52%);
+    --highlight-contrast: hsl(187, 61%, 65%);
+  }
+  // basic
+  .dark {
+    --background: #222;
+    --background-contrast: hsl(0, 0%, 15%);
+    --background-dark: hsl(333, 21%, 85%);
+
+    --text: #eee;
+    --text-contrast: #eee;
+
+    --highlight: #94dce5;
+    --highlight-contrast: #d74833;
+  }
+
+  .light {
+    --background: #eee;
+    --background-contrast: #312f2f;
+
+    --text: #22181c;
+    --text-contrast: #ef626c;
+
+    --highlight: hsl(187, 61%, 64%);
+    --highlight-contrast: hsl(8, 67%, 62%);
+  }
+
+  //second
+  .light2 {
+    --background: #f2f5ea;
+    --background-contrast: #2c363f;
+
+    --text: #2c363f;
+    --text-contrast: #2c363f;
+
+    --highlight: #f18f01;
+    --highlight-contrast: #e75a7c;
+  }
+
+  .dark2 {
+    --background: #2c363f;
+    --background-contrast: #f2f5ea;
+
+    --text: #f2f5ea;
+    --text-contrast: #2c363f;
+
+    --highlight: #f18f01;
+    --highlight-contrast: #e75a7c;
+  }
+
+  ._light {
+    --background: hsl(333, 21%, 92%);
+    --background-contrast: hsl(333, 21%, 90%);
+    --background-dark: hsl(333, 21%, 85%);
+
+    --text: #222;
+    --text-contrast: #222;
+
+    // --highlight: #3982ab;
+    --highlight: hsl(8, 67%, 52%);
+    --highlight-contrast: #3982ab;
+    // --highlight-contrast: hsl(187, 61%, 74%);
+  }
+}
+
+$none: var(--none);
+
+$background: var(--background);
+$background-contrast: var(--background-contrast);
+$background-dark: var(--background-dark);
+
+$text: var(--text);
+$text-contrast: var(--text-contrast);
+
+$highlight: var(--highlight);
+$highlight-contrast: var(--highlight-contrast);

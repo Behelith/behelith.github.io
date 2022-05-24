@@ -45,12 +45,15 @@ const RangeInput = props => {
     const max = typeof props.max == 'number' ? props.max : 100
 
     const refHandler = useRef()
+    const refWrapper = useRef()
     const refHandlerParentRect = useRef()
 
     const updateValue = (value) => {
         setValue(value)
         if (props.onValueChange) props.onValueChange(value)
     }
+
+
 
     const onGrab = (e) => {
         refHandlerParentRect.current = e.target.parentElement.getBoundingClientRect();
@@ -60,11 +63,13 @@ const RangeInput = props => {
 
         document.addEventListener('touchend', onRelease)
         document.addEventListener('touchmove', onMove)
+
+        onMove(e)
     }
 
     const onMove = (e) => {
         let xPos = 0
-        if (e.type === 'touchmove') {
+        if (e.type === 'touchmove' || e.type === 'touchstart') {
             xPos = e.touches[0].clientX - refHandlerParentRect.current.x
         } else {
             xPos = e.clientX - refHandlerParentRect.current.x
@@ -96,10 +101,10 @@ const RangeInput = props => {
     }
 
     useEffect(() => {
-        if (refHandler.current) {
+        if (refWrapper.current) {
 
-            refHandler.current.addEventListener('mousedown', onGrab)
-            refHandler.current.addEventListener('touchstart', onGrab)
+            refWrapper.current.addEventListener('mousedown', onGrab)
+            refWrapper.current.addEventListener('touchstart', onGrab)
 
 
             // const discreteValue = getDiscreteValue(min, max, xPercPos, step)
@@ -108,6 +113,12 @@ const RangeInput = props => {
             refHandler.current.style.left = (discretePercent * 100) + '%'
 
         }
+
+        // if (refWrapper.current) {
+        //     refWrapper.current.addEventListener('mousedown', (e) => {
+        //         console.log('refWrapper mousedown', e.target);
+        //     })
+        // }
 
         return () => {
             // refHandler.current.removeEventListener('mousedown', onGrab)
@@ -118,7 +129,7 @@ const RangeInput = props => {
 
     return (
         <div className="app-input">
-            <div className="input-wrapper">
+            <div ref={refWrapper} className="input-wrapper">
                 <div className="input-range">
                     <div ref={refHandler} className="input-handler"></div>
                 </div>

@@ -3,16 +3,17 @@ import DotEntity from "./DotEntity";
 
 class DotEngine {
     constructor() {
+        this.variant = 'dot_engine'
         this.entities = []
-        this.canvas = null
+        // this.canvas = null
 
-        this.decay = .1
-        this.entitiesLimit = 10;
-        this.particleSize = 25
-        this.particleSpeed = .1
-        this.speed = 3
-        this.direction = 90
-        this.growthRate = 0
+        // this.decay = .1
+        // this.entitiesLimit = 10;
+        // this.particleSize = 25
+        // this.particleSpeed = .1
+        // this.speed = 3
+        // this.direction = 90
+        // this.growthRate = 0
 
         this.config = {
             entitiesLimit: {

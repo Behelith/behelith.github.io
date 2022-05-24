@@ -6,7 +6,7 @@ const BackgroundController = props => {
     const langContext = useContext(LangContext)
 
     if (langContext.lang == 'pl') return (<div className='fade-in'>
-        <p className="page-label">Kontroller tła</p>
+        <p className="page-label">Kontroler tła</p>
         <p>Tutaj możesz użyć suwaków do zmiany zachowania tła</p>
         <AnimatedBackgroundControls lang={langContext.lang} />
     </div>)
@@ -15,6 +15,8 @@ const BackgroundController = props => {
         <div className='fade-in'>
             <p className="page-label">Background Controller</p>
             <p>Here you can use sliders to play with background</p>
+
+
             <AnimatedBackgroundControls lang={langContext.lang} />
         </div>
     );

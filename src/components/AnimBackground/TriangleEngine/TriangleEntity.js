@@ -1,79 +1,139 @@
 import { random } from "../../../utils/utils";
 
+const BASIC_COLORS = [
+    // basic
+    "187, 61%, 74%",
+    "8, 67%, 52%",
+    // set2
+    // '36, 99%, 47%',
+    // '346, 75%, 63%'
+];
 class TriangleEntity {
-    constructor(x = 0, y = 0, hue = random(50, 80)) {
-        this.x = x;
-        this.y = y;
+    constructor(config) {
+        this.column = typeof config.column === "number" ? config.column : 0;
+        this.row = typeof config.row === "number" ? config.row : 0;
+        this.width = typeof config.size === "number" ? config.size : 10;
+        this.height = Math.sqrt(3) * this.width * 0.5;
 
-        this.height = 32
-        this.width = 28
+        this.isHollow = random(0, 1) > 0.5;
 
-        // this.decay = random(0.01, 0.5);
-        this.decay = .1;
-        this.hollow = random(0, 1) > 0.5;
+        this.shift = this.width * 0.5;
+        this.posX = this.width * this.column * 0.5 - this.shift;
+        this.posY = this.height * this.row;
 
-        // this.hue = 200;
-        this.hue = hue;
+        this.hsl = BASIC_COLORS[parseInt(random(0, BASIC_COLORS.length))];
 
-        this.isAlive = true;
-        // this.maxLife = 40;
-        this.maxLife = random(10, 60);
-        this.life = 0;
-        this.lifeProgress = 0;
+        this.char = random(0, 1) > 0.5
+            ? String.fromCharCode(parseInt(random(48, 126)))
+            : null;
 
-        // this.opacity = .81
-        this.opacity = random(.1, .9)
-    }
+        this.charX = this.posX + this.width * 0.5;
+        this.charY = this.posY + (this.height * 2) / 3;
 
-    update() {
-        const config = {
+        if ((this.column % 2 == 1 && this.row % 2 == 0) ||
+            (this.column % 2 == 0 && this.row % 2 == 1)) {
+            // inverted
+            this.charY = this.posY + (this.height * 1) / 3;
         }
 
+        this.life = 0;
+        this.maxLife = random(50, 150);
+        this.isAlive = true;
+        this.lifeProgress = 0;
+
+        this.decay = 0.752;
+
+        this.opacity = random(0.1, 1);
+    }
+
+    update(canvas, delta) {
+        // console.log(canvas);
+
+        if (!canvas) return;
+
         if (!this.isAlive) return;
-        // this.hue += 1
-        // this.r += this.decay;
-        // this.x += .1
-        // this.y += this.decay;
 
         this.life += this.decay;
-        this.lifeProgress = 1 - (this.life / this.maxLife)
-        // console.log(this.life);
+        this.lifeProgress = 1 - this.life / this.maxLife;
 
-        if (this.life >= this.maxLife) this.isAlive = false;
+        if (
+            this.posX > canvas.width ||
+            this.posX - this.shift < 0 ||
+            this.posY + this.height > canvas.height ||
+            this.posY - this.height < 0 ||
+            this.life >= this.maxLife
+        ) {
+            this.isAlive = false;
+        }
     }
 
     draw(context) {
         context.beginPath();
 
-        // context.fillStyle = `hsla(${this.hue},70%, 50%, ${1 - this.life})`;
-        // context.strokeStyle = `hsla(${this.hue},70%, 50%, ${1 - this.life})`;
-        context.fillStyle = `hsla(${this.hue},70%, 50%, ${this.opacity * this.lifeProgress})`;
-        context.strokeStyle = `hsla(${this.hue},70%, 50%, ${this.opacity * this.lifeProgress})`;
+        let char = ".";
+        this.charY;
 
-        // context.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-        let region = this.fillRegion()
+        let charFillStyle = `hsla(${this.hsl},${this.opacity * this.lifeProgress * .8})`;
+        let regionFillStyle = `hsla(${this.hsl},${this.opacity * this.lifeProgress * .8})`;
+        let regionStrokeStyle = `hsla(${this.hsl},${this.opacity * this.lifeProgress * .8})`;
 
-        if (this.hollow) context.stroke(region);
-        else context.fill(region);
+        let region;
+
+        if ((this.column % 2 == 1 && this.row % 2 == 0) ||
+            (this.column % 2 == 0 && this.row % 2 == 1)) {
+            region = this.fillRegionReverse();
+        } else {
+            region = this.fillRegion();
+        }
+
+        if (this.drawDiag) {
+            context.textAlign = "center";
+            context.fillStyle = "#fff";
+            context.font = "12px courier";
+            context.fillText(
+                // this.column + "," + this.row,
+                this.lifeProgress.toFixed(2),
+                this.charX,
+                this.charY + 15
+            );
+        }
+
+        // -----------
+
+        // region.moveTo(0, this.y + this.height);
+
+        if (this.char) {
+            context.textBaseline = "middle";
+            context.textAlign = "center";
+            context.font = this.height / 3 + "px courier";
+
+            context.fillStyle = charFillStyle;
+            context.fillText(this.char, this.charX, this.charY);
+        } else if (this.isHollow) {
+            context.fillStyle = regionFillStyle;
+            context.fill(region);
+        } else {
+            context.strokeStyle = regionStrokeStyle;
+            context.stroke(region);
+        }
     }
 
     fillRegion() {
         const region = new Path2D();
-        // region.moveTo(0, this.y + this.height);
-        region.moveTo(this.x, this.y + this.height);
-        region.lineTo(this.x + this.width, this.y + this.height);
-        region.lineTo(this.x + this.width * .5, this.y);
+        region.moveTo(this.posX, this.posY + this.height);
+        region.lineTo(this.posX + this.width, this.posY + this.height);
+        region.lineTo(this.posX + this.width * 0.5, this.posY);
         region.closePath();
-        return region
+        return region;
     }
 
     fillRegionReverse() {
         const region = new Path2D();
-        region.moveTo(this.x, this.y);
-        region.lineTo(this.x + this.width, this.y);
-        region.lineTo(this.x + this.width * .5, this.y + this.height);
+        region.moveTo(this.posX, this.posY);
+        region.lineTo(this.posX + this.width, this.posY);
+        region.lineTo(this.posX + this.width * 0.5, this.posY + this.height);
         region.closePath();
-        return region
+        return region;
     }
 }
 

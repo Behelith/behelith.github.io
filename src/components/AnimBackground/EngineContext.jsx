@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import RangeInput from "../Inputs/RangeInput";
 import DotEngine from "./DotEngine/DotEngine";
+import TriangleEngine from "./TriangleEngine/TriangleEngine";
 
 
 const updateCanvas = (canvas) => {
@@ -29,35 +30,38 @@ export const BackgroundContextProvider = (props) => {
     const canvas = <canvas ref={canvasRef} className="animated-canvas" />
 
     const engineRef = useRef(new DotEngine())
+    // const engineRef = useRef(new TriangleEngine())
     const updateRef = useRef()
-    const ctxRef = useRef(null)
     const nowRef = useRef(new Date().getTime())
-    // const deltaRef = useRef(0)
 
 
+    const update = () => {
+        // console.log('BackgroundContextProvider.update()', engineRef.current, canvasRef.current);
+        if (engineRef.current && canvasRef.current) {
+            updateCanvas(canvasRef.current)
 
-    useEffect(() => {
-        if (!engineRef.current) return
-        // let _context = canvasRef.current.getContext('2d')
-        if (engineRef.current)
-            ctxRef.current = canvasRef.current.getContext('2d')
-        updateCanvas(canvasRef.current)
-
-
-        const update = () => {
-            if (!engineRef.current) return
             let then = nowRef.current
             nowRef.current = new Date().getTime()
             let delta = nowRef.current - then
-            // deltaRef = nowRef.current - then
 
             updateCanvas(canvasRef.current)
             engineRef.current.update(canvasRef.current, delta)
-            engineRef.current.draw(ctxRef.current)
-            updateRef.current = requestAnimationFrame(update)
+            engineRef.current.draw(canvasRef.current.getContext('2d'))
         }
 
         updateRef.current = requestAnimationFrame(update)
+    }
+
+    const setDotEngine = () => { engineRef.current = new DotEngine() }
+    const setTriangleEngine = () => { engineRef.current = new TriangleEngine() }
+    const setEngineDisabled = () => {
+        engineRef.current = null
+        if (canvasRef.current) canvasRef.current.getContext('2d')
+            .clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    }
+
+    useEffect(() => {
+        requestAnimationFrame(update)
 
         return () => {
             cancelAnimationFrame(update)
@@ -67,10 +71,16 @@ export const BackgroundContextProvider = (props) => {
 
     return (<BackgroundContext.Provider value={{
         canvas,
+        // canvas: null,
         // canvas: canvasRef.current,
         engine: engineRef.current
     }}>
         {props.children}
+        {/* <div>
+            <button onClick={setDotEngine}>dot</button>
+            <button onClick={setTriangleEngine}>triangle</button>
+            <button onClick={setEngineDisabled}>disable</button>
+        </div> */}
     </BackgroundContext.Provider>)
 };
 
@@ -79,30 +89,22 @@ export const AnimatedBackground = props => {
     return background.canvas
 }
 
-export const AnimatedBackgroundControls = props => {
-    const background = useContext(BackgroundContext)
+const DotEngineControls = (props) => {
 
-    const [entitiesLimit, setEntitiesLimit] = useState(15)
-    const [decay, setDecay] = useState(0.2)
-    const [size, setSize] = useState(10)
-    const [speed, setSpeed] = useState(.1)
-    const [direction, setDirection] = useState(90)
-    const [growthRate, setGrowthRate] = useState(-0.1)
-
-    const [controls, setControls] = useState(background.engine.getConfig())
-    const [advancedControls, setAdvancedControls] = useState(background.engine.getAdvancedConfig())
+    const [controls, setControls] = useState(props.engine.getConfig())
+    const [advancedControls, setAdvancedControls] = useState(props.engine.getAdvancedConfig())
 
     const updateControl = (key, value) => {
-        const _controls = { ...background.engine.getConfig() }
+        const _controls = { ...props.engine.getConfig() }
         const updatedControls = { ..._controls, [key]: { ..._controls[key], value } }
-        background.engine.setConfig(updatedControls)
+        props.engine.setConfig(updatedControls)
         setControls(updatedControls)
     }
 
     const updateAdvancedControl = (key, value) => {
-        const _controls = { ...background.engine.getAdvancedConfig() }
+        const _controls = { ...props.engine.getAdvancedConfig() }
         const updatedControls = { ..._controls, [key]: { ..._controls[key], value } }
-        background.engine.setAdvancedConfig(updatedControls)
+        props.engine.setAdvancedConfig(updatedControls)
         setAdvancedControls(updatedControls)
     }
 
@@ -137,62 +139,35 @@ export const AnimatedBackgroundControls = props => {
         />)
     })
 
-    const inputs = (<>
-        <RangeInput min={0} max={50} step={1} label='Particle count'
-            value={entitiesLimit}
-            onValueChange={(value) => {
-                setEntitiesLimit(value)
-                background.engine.setEntitiesLimit(value)
-            }}
-        />
-
-        <RangeInput min={0.1} max={2} step={0.01} label='Particle decay'
-            value={decay}
-            onValueChange={(value) => {
-                setDecay(value)
-                background.engine.setDecay(value)
-            }}
-        />
-
-        <RangeInput min={5} max={50} step={1} label='Particle size'
-            value={size}
-            onValueChange={(value) => {
-                setSize(value)
-                background.engine.setSize(value)
-            }}
-        />
-
-        <RangeInput min={0} max={2.5} step={.01} label='Particle speed'
-            value={speed}
-            onValueChange={(value) => {
-                setSpeed(value)
-                background.engine.setSpeed(value)
-            }}
-        />
-
-        <RangeInput min={0} max={360} step={5} label='Particle direction'
-            value={direction}
-            onValueChange={(value) => {
-                setDirection(value)
-                background.engine.setDirection(value)
-            }}
-
-        />
-
-        <RangeInput min={-0.5} max={0.5} step={0.1} label='Particle growth rate'
-            value={growthRate}
-            onValueChange={(value) => {
-                setGrowthRate(value)
-                background.engine.setGrowthRate(value)
-            }}
-        />
-    </>)
 
     return (
         <div className="animated-canvas-controls">
+
             {controlElements}
             {/* --- */}
             {/* {advancedControlElements} */}
         </div>
     )
+}
+
+
+export const AnimatedBackgroundControls = props => {
+    const background = useContext(BackgroundContext)
+
+    console.log(background);
+
+    // const [entitiesLimit, setEntitiesLimit] = useState(15)
+    // const [decay, setDecay] = useState(0.2)
+    // const [size, setSize] = useState(10)
+    // const [speed, setSpeed] = useState(.1)
+    // const [direction, setDirection] = useState(90)
+    // const [growthRate, setGrowthRate] = useState(-0.1)
+
+    if (!background.engine) return null
+
+    if (background.engine.variant === 'dot_engine') {
+        return <DotEngineControls engine={background.engine} lang={props.lang} />
+    }
+
+    return null
 }

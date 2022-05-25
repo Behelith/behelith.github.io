@@ -1,5 +1,13 @@
 :root {
   --none: hsla(0, 0%, 0%, 0);
+  /*  
+    // Scheme 2
+    #2A2B2A - dark
+    #F8F4E3 - light
+    #E5446D - highlight
+    #FF8966 - highlight - alt
+    #706C61 - border / text
+    */
 }
 :root .light_ {
   --background: hsla(333, 21%, 92%, 1);
@@ -19,7 +27,7 @@
   --highlight: hsl(8, 67%, 52%);
   --highlight-contrast: hsl(187, 61%, 65%);
 }
-:root .dark {
+:root .dark-basic {
   --background: #222;
   --background-contrast: hsl(0, 0%, 15%);
   --background-dark: hsl(333, 21%, 85%);
@@ -28,7 +36,7 @@
   --highlight: #94dce5;
   --highlight-contrast: #d74833;
 }
-:root .light {
+:root .light-basic {
   --background: #eee;
   --background-contrast: #312f2f;
   --text: #22181c;
@@ -36,7 +44,7 @@
   --highlight: hsl(187, 61%, 64%);
   --highlight-contrast: hsl(8, 67%, 62%);
 }
-:root .light2 {
+:root .light-secondary {
   --background: #f2f5ea;
   --background-contrast: #2c363f;
   --text: #2c363f;
@@ -44,7 +52,7 @@
   --highlight: #f18f01;
   --highlight-contrast: #e75a7c;
 }
-:root .dark2 {
+:root .dark-secondary {
   --background: #2c363f;
   --background-contrast: #f2f5ea;
   --text: #f2f5ea;
@@ -52,14 +60,21 @@
   --highlight: #f18f01;
   --highlight-contrast: #e75a7c;
 }
-:root ._light {
-  --background: hsl(333, 21%, 92%);
-  --background-contrast: hsl(333, 21%, 90%);
-  --background-dark: hsl(333, 21%, 85%);
-  --text: #222;
-  --text-contrast: #222;
-  --highlight: hsl(8, 67%, 52%);
-  --highlight-contrast: #3982ab;
+:root .dark {
+  --background: #2a2b2a;
+  --border: #706c61;
+  --text: #f8f4e3;
+  --text-contrast: #f8f4e3;
+  --highlight: hsl(345, 76%, 58%);
+  --highlight-contrast: hsl(14, 100%, 70%);
+}
+:root .light {
+  --background: #f8f4e3;
+  --border: hsl(44, 7%, 71%);
+  --text: #706c61;
+  --text-contrast: #f8f4e3;
+  --highlight: #e5446d;
+  --highlight-contrast: #ff8966;
 }
 
 .min,
@@ -137,6 +152,29 @@
   color: var(--highlight-contrast);
 }
 
+button.floating {
+  position: fixed;
+  bottom: 32px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: var(--background);
+  border: 1px solid var(--text);
+  color: var(--text);
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+button.floating:hover {
+  color: var(--highlight-contrast);
+  border-color: var(--highlight-contrast);
+}
+button.floating.right {
+  right: 16px;
+}
+button.floating.left {
+  left: 16px;
+}
+
 .page-label {
   font-size: 2em;
   color: var(--highlight-contrast);
@@ -149,59 +187,31 @@
   line-height: 1.5em;
 }
 
-span {
-  display: none;
-  justify-content: center;
-  padding: 1em 0;
-  z-index: 10;
-}
-@media (min-width: 900px) {
-  span {
-    display: flex;
-  }
-}
-span.mobile {
-  padding: 0.5em 0;
-  display: flex;
-  position: fixed;
-  bottom: 0;
-}
-@media (min-width: 900px) {
-  span.mobile {
-    display: none;
-  }
-}
-span.mobile a,
-span.mobile button {
-  padding: 0.5em 1em;
-}
-span button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-span a,
-span button {
-  padding: 1em 1em;
+.page-watermark {
+  position: absolute;
+  z-index: -1;
   color: var(--highlight);
-  color: var(--text-contrast);
-  text-decoration: none;
-  transition: 0.2s, border-color 0.2s;
-  border-bottom: 2px solid var(--none);
-}
-span a + a,
-span button + a {
-  margin-left: 2px;
+  font-weight: bold;
+  opacity: 0.1;
+  top: 0;
+  left: 32px;
+  font-size: 10em;
+  padding: 0;
+  margin: 0;
 }
 
 nav.app-nav {
   position: fixed;
   top: 0;
-  background-color: var(--background-contrast);
   width: 100vw;
   z-index: 5;
-  padding: 0.8em 0;
-  color: var(--highlight);
+  color: var(--text);
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+nav.app-nav.visible {
+  background-color: var(--background);
+  border-color: var(--border);
 }
 nav.app-nav button,
 nav.app-nav a {
@@ -225,29 +235,24 @@ nav.app-nav a.active {
   color: var(--highlight-contrast);
 }
 
-.separator {
-  border: unset;
-  border-top: 1px solid var(--text-contrast);
-  width: 100%;
-}
-
-nav.app-nav.mobile {
-  transition: transform 0.2s;
-}
 nav.app-nav.mobile .app-nav-config {
+  height: 48px;
   right: 0.2em;
   display: flex;
+  transition: height 0.2s;
+}
+nav.app-nav.mobile.visible .app-nav-config {
+  height: 64px;
 }
 nav.app-nav.mobile .nav-content {
+  background-color: var(--background);
   flex-direction: column;
 }
-nav.app-nav.mobile .toggle-button {
-  background-color: var(--background-contrast);
-  color: var(--highlight);
-  margin-right: auto;
+nav.app-nav.mobile .nav-content a {
+  text-align: center;
 }
-nav.app-nav.mobile:hover {
-  transform: translateY(0%);
+nav.app-nav.mobile .toggle-button {
+  margin-right: auto;
 }
 
 .nav-content {
@@ -259,13 +264,6 @@ nav.app-nav.mobile:hover {
 .nav-content.centered {
   justify-content: center;
 }
-.nav-content > * + * {
-  margin-left: 0.5em;
-}
-
-nav.app-nav.mobile .nav-content > * + * {
-  margin-left: 0.2em;
-}
 
 .skill-progress-container {
   padding: 2em 0;
@@ -273,9 +271,15 @@ nav.app-nav.mobile .nav-content > * + * {
 
 .skill-progress-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-column-gap: 2em;
   grid-row-gap: 2em;
+}
+@media (min-width: 667px) and (max-width: 993px) {
+  .skill-progress-grid {
+    grid-column-gap: 5em;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media (min-width: 993px) {
   .skill-progress-grid {
@@ -318,7 +322,7 @@ nav.app-nav.mobile .nav-content > * + * {
 
 .input-range {
   position: relative;
-  border-top: 1px solid var(--highlight);
+  border-top: 1px solid var(--border);
   width: 100%;
 }
 .input-range .input-handler {
@@ -370,27 +374,6 @@ nav.app-nav.mobile .nav-content > * + * {
   z-index: -1;
 }
 
-.animated-canvas-temp {
-  border: 1px solid var(--highlight-contrast);
-  background: linear-gradient(60deg, var(--background) 40%, var(--background-contrast) 41%);
-  position: fixed;
-  top: 0;
-  background-color: #0008;
-  width: 100vw;
-  height: 300px;
-  opacity: 0.5;
-  z-index: -1;
-}
-
-.animated-canvas-controls-temp {
-  z-index: 22;
-}
-
-.animated-canvas-controls {
-  width: 100%;
-  flex: 1;
-}
-
 html,
 body {
   margin: 0;
@@ -403,6 +386,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   z-index: -1;
   margin-top: 3em;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .app-links {
@@ -421,12 +406,14 @@ a.external-link:hover {
 }
 
 .app-footer {
+  color: var(--border);
+  font-size: 0.8em;
   margin: 3em 0;
-  font-size: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.8;
+  flex-direction: column;
 }
 
 .app-content {

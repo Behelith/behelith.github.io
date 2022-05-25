@@ -12,3 +12,17 @@
   font-size: 1.1em;
   line-height: 1.5em;
 }
+
+.page-watermark {
+  position: absolute;
+  z-index: -1;
+  color: colors.$highlight;
+  font-weight: bold;
+  opacity: 0.1;
+  // top: 16px;
+  top: 0;
+  left: 32px;
+  font-size: 10em;
+  padding: 0;
+  margin: 0;
+}

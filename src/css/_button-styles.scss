@@ -43,3 +43,32 @@
     color: colors.$highlight-contrast;
   }
 }
+
+button.floating {
+  position: fixed;
+  bottom: 32px;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+
+  background-color: colors.$background;
+  border: 1px solid colors.$text;
+  color: colors.$text;
+
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    color: colors.$highlight-contrast;
+    border-color: colors.$highlight-contrast;
+  }
+
+  &.right {
+    right: 16px;
+  }
+
+  &.left {
+    left: 16px;
+  }
+}

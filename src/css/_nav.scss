@@ -1,72 +1,22 @@
 @use "./colors";
 @use "./button-styles";
 
-span {
-  // background-color: colors.$background-contrast;
-  // color: colors.$text;
-  display: none;
-  @media (min-width: 900px) {
-    display: flex;
-  }
-
-  //   position: fixed;
-  //   width: 100vw;
-
-  // align-items: center;
-  justify-content: center;
-  padding: 1em 0;
-  // margin: 1em;
-  z-index: 10;
-
-  &.mobile {
-    padding: 0.5em 0;
-    @media (min-width: 900px) {
-      display: none;
-    }
-
-    display: flex;
-    position: fixed;
-    bottom: 0;
-
-    a,
-    button {
-      // border: 1px solid colors.$background;
-      padding: 0.5em 1em;
-    }
-  }
-
-  button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  a,
-  button {
-    // border: 1px solid colors.$background;
-    padding: 1em 1em;
-    // color: colors.$text;
-    color: colors.$highlight;
-    color: colors.$text-contrast;
-
-    text-decoration: none;
-    transition: 0.2s, border-color 0.2s;
-    border-bottom: 2px solid colors.$none;
-
-    & + a {
-      margin-left: 2px;
-    }
-  }
-}
-
 nav.app-nav {
   position: fixed;
   top: 0;
-  background-color: colors.$background-contrast;
   width: 100vw;
+
   z-index: 5;
-  padding: 0.8em 0;
-  color: colors.$highlight;
+  // padding: 0.8em 0;
+  color: colors.$text;
+  border-bottom: 1px solid transparent;
+
+  transition: background-color 0.2s, border-color 0.2s;
+
+  &.visible {
+    background-color: colors.$background;
+    border-color: colors.$border;
+  }
 
   button,
   a {
@@ -74,46 +24,35 @@ nav.app-nav {
   }
 }
 
-.separator {
-  border: unset;
-  border-top: 1px solid colors.$text-contrast;
-  width: 100%;
-}
-
 nav.app-nav.mobile {
-  // padding: 0.2em 0;
-  // top: unset;
-  // bottom: 0;
-
   .app-nav-config {
+    height: 48px;
+
     right: 0.2em;
     display: flex;
+
+    transition: height 0.2s;
   }
 
-  // margin: 1em 0.5em;
-  // padding: unset;
+  &.visible .app-nav-config {
+    height: 64px;
+  }
+
   .nav-content {
+    background-color: colors.$background;
     flex-direction: column;
-    // padding: 1em 0.5em;
+
+    a {
+      text-align: center;
+    }
   }
 
   .toggle-button {
-    background-color: colors.$background-contrast;
-    color: colors.$highlight;
-
     margin-right: auto;
-  }
-
-  transition: transform 0.2s;
-  // transform: translateY(-90%);
-
-  &:hover {
-    transform: translateY(0%);
   }
 }
 
 .nav-content {
-  // border: solid 1px colors.$highlight;
   position: relative;
   max-width: 900px;
   margin: auto;
@@ -121,15 +60,5 @@ nav.app-nav.mobile {
 
   &.centered {
     justify-content: center;
-  }
-
-  & > * + * {
-    margin-left: 0.5em;
-  }
-}
-
-nav.app-nav.mobile .nav-content {
-  & > * + * {
-    margin-left: 0.2em;
   }
 }

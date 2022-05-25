@@ -11,6 +11,15 @@
   // --highlight: hsl(187, 61%, 74%);
   // --highlight-contrast: hsl(8, 67%, 52%);
 
+  /*  
+    // Scheme 2
+    #2A2B2A - dark
+    #F8F4E3 - light
+    #E5446D - highlight
+    #FF8966 - highlight - alt
+    #706C61 - border / text
+    */
+
   //basic
   .light_ {
     --background: hsla(333, 21%, 92%, 1);
@@ -35,8 +44,9 @@
     --highlight: hsl(8, 67%, 52%);
     --highlight-contrast: hsl(187, 61%, 65%);
   }
+
   // basic
-  .dark {
+  .dark-basic {
     --background: #222;
     --background-contrast: hsl(0, 0%, 15%);
     --background-dark: hsl(333, 21%, 85%);
@@ -48,7 +58,7 @@
     --highlight-contrast: #d74833;
   }
 
-  .light {
+  .light-basic {
     --background: #eee;
     --background-contrast: #312f2f;
 
@@ -60,7 +70,7 @@
   }
 
   //second
-  .light2 {
+  .light-secondary {
     --background: #f2f5ea;
     --background-contrast: #2c363f;
 
@@ -71,7 +81,7 @@
     --highlight-contrast: #e75a7c;
   }
 
-  .dark2 {
+  .dark-secondary {
     --background: #2c363f;
     --background-contrast: #f2f5ea;
 
@@ -82,25 +92,29 @@
     --highlight-contrast: #e75a7c;
   }
 
-  ._light {
-    --background: hsl(333, 21%, 92%);
-    --background-contrast: hsl(333, 21%, 90%);
-    --background-dark: hsl(333, 21%, 85%);
+  .dark {
+    --background: #2a2b2a;
+    --border: #706c61;
+    --text: #f8f4e3;
+    --text-contrast: #f8f4e3;
+    --highlight: hsl(345, 76%, 58%);
+    --highlight-contrast: hsl(14, 100%, 70%);
+  }
 
-    --text: #222;
-    --text-contrast: #222;
-
-    // --highlight: #3982ab;
-    --highlight: hsl(8, 67%, 52%);
-    --highlight-contrast: #3982ab;
-    // --highlight-contrast: hsl(187, 61%, 74%);
+  .light {
+    --background: #f8f4e3;
+    --border: hsl(44, 7%, 71%);
+    --text: #706c61;
+    --text-contrast: #f8f4e3;
+    --highlight: #e5446d;
+    --highlight-contrast: #ff8966;
   }
 }
 
 $none: var(--none);
 
 $background: var(--background);
-$background-contrast: var(--background-contrast);
+$border: var(--border);
 $background-dark: var(--background-dark);
 
 $text: var(--text);

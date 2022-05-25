@@ -7,9 +7,14 @@
 
 .skill-progress-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-column-gap: 2em;
   grid-row-gap: 2em;
+
+  @include media.mid {
+    grid-column-gap: 5em;
+    grid-template-columns: 1fr 1fr;
+  }
 
   @include media.max {
     grid-column-gap: 5em;

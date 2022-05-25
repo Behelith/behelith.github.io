@@ -29,6 +29,8 @@ body {
   z-index: -1;
 
   margin-top: 3em;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .app-links {
@@ -42,12 +44,16 @@ a.external-link {
 }
 
 .app-footer {
+  color: colors.$border;
+
+  font-size: 0.8em;
+  // font-size: 1em;
   margin: 3em 0;
-  font-size: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.8;
+  flex-direction: column;
 }
 
 .app-content {

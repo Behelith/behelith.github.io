@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { AnimatedBackground } from './components/AnimBackground/EngineContext'
@@ -8,14 +8,25 @@ import Page404 from './Pages/Page404/Page404'
 import Skills from './Pages/Skills/Skills'
 import NavBar from './components/NavBar/NavBar'
 import { LangContext } from './contexts/LangContext'
+import useScroll from './hooks/useScroll'
 
 function App() {
   const langContext = useContext(LangContext)
 
+  const [scrollTopButtonVisible, setScrollTopButtonVisible] = useState(false)
+
+  useScroll(threshhold => {
+    if (threshhold > 64) setScrollTopButtonVisible(true)
+    else setScrollTopButtonVisible(false)
+  })
+
   const footer = <div className='app-footer fade-in'>
-    Adrian Fijałkowski | Copyright &copy; 2022
+    <p>...</p>
+    <p>Adrian Fijałkowski | Copyright &copy; 2022</p>
     {/* Lorem | Copyright &copy; 2022 */}
   </div>
+
+
 
 
   const contentLang = langContext?.lang
@@ -42,6 +53,10 @@ function App() {
         </div>
 
         {footer}
+
+        {scrollTopButtonVisible ? <button className="floating right fade-in" onClick={e => window.scrollTo(0, 0)}>
+          <i className="fa fa-arrow-up"></i>
+        </button> : null}
 
       </div>
     </>

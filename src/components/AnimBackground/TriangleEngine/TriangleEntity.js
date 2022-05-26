@@ -1,13 +1,6 @@
+import { CREME_COLORS } from "../../../utils/colors";
 import { random } from "../../../utils/utils";
 
-const BASIC_COLORS = [
-    // basic
-    "187, 61%, 74%",
-    "8, 67%, 52%",
-    // set2
-    // '36, 99%, 47%',
-    // '346, 75%, 63%'
-];
 class TriangleEntity {
     constructor(config) {
         this.column = typeof config.column === "number" ? config.column : 0;
@@ -21,7 +14,7 @@ class TriangleEntity {
         this.posX = this.width * this.column * 0.5 - this.shift;
         this.posY = this.height * this.row;
 
-        this.hsl = BASIC_COLORS[parseInt(random(0, BASIC_COLORS.length))];
+        this.hsl = CREME_COLORS[parseInt(random(0, CREME_COLORS.length))];
 
         this.char = random(0, 1) > 0.5
             ? String.fromCharCode(parseInt(random(48, 126)))

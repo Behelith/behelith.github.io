@@ -1,13 +1,5 @@
+import { CREME_COLORS } from "../../../utils/colors";
 import { random } from "../../../utils/utils";
-
-const BASIC_COLORS = [
-    // basic
-    "187, 61%, 74%",
-    "8, 67%, 52%",
-    // set2
-    // '36, 99%, 47%',
-    // '346, 75%, 63%'
-];
 
 class DotEntity {
     constructor(config) {
@@ -31,7 +23,7 @@ class DotEntity {
 
         this.hollow = random(0, 1) > 0.5;
 
-        this.hsl = BASIC_COLORS[parseInt(random(0, BASIC_COLORS.length))];
+        this.hsl = CREME_COLORS[parseInt(random(0, CREME_COLORS.length))];
 
         // this.maxLife = 40;
 

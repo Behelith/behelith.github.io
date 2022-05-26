@@ -154,8 +154,6 @@ const DotEngineControls = (props) => {
 export const AnimatedBackgroundControls = props => {
     const background = useContext(BackgroundContext)
 
-    console.log(background);
-
     // const [entitiesLimit, setEntitiesLimit] = useState(15)
     // const [decay, setDecay] = useState(0.2)
     // const [size, setSize] = useState(10)

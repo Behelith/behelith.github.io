@@ -194,7 +194,7 @@ button.floating.left {
   font-weight: bold;
   opacity: 0.1;
   top: 0;
-  left: 32px;
+  left: -64px;
   font-size: 10em;
   padding: 0;
   margin: 0;
@@ -317,7 +317,7 @@ nav.app-nav.mobile .toggle-button {
   flex-flow: column;
 }
 .app-input + .app-input {
-  margin-top: 1.5em;
+  margin-top: 2.5em;
 }
 
 .input-range {
@@ -372,6 +372,10 @@ nav.app-nav.mobile .toggle-button {
   height: 100vh;
   opacity: 0.5;
   z-index: -1;
+}
+
+.animated-canvas-controls {
+  margin-top: 2.5em;
 }
 
 html,

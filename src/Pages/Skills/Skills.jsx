@@ -20,6 +20,7 @@ const Skills = props => {
 
     if (langContext.lang == 'pl') return (
         <div className='fade-in'>
+            <p className="page-watermark">Umiejętności</p>
             <p className="page-label">Nabyte umiejętności</p>
 
             <p className="page-text">Jeśli ciekawi Cię, czym się (mniej więcej) zajmuję to poniżej znajduje się lista językow, frameworków i programów, z którymi przyszło mi pracować</p>
@@ -30,7 +31,8 @@ const Skills = props => {
 
     return (
         <div className='fade-in'>
-            <p className="page-label">Acquired Skills</p>
+            <p className="page-watermark">Skills</p>
+            <p className="page-label">Acquired skills</p>
 
             <p className="page-text">If you're curious what I am capable of (more or less), here is list of languages, frameworks and programs I worked with</p>
 

@@ -7,6 +7,7 @@ const Page404 = props => {
 
     if (langContext.lang == 'pl') return (
         <div className='fade-in'>
+            <p className="page-watermark">404</p>
             <p className="page-label">404 :(</p>
             <p>Jestem przekonany, że chodziło co coś ważnego, ale tutaj tego nie ma</p>
         </div>
@@ -14,6 +15,7 @@ const Page404 = props => {
 
     return (
         <div className='fade-in'>
+            <p className="page-watermark">404</p>
             <p className="page-label">404 :(</p>
             <p>I am sure you were looking for something important, but it's not here</p>
         </div>

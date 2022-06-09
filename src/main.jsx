@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from './App'
 import './css/index.css'
 import './css/all.css'
@@ -9,15 +9,15 @@ import { BackgroundContextProvider } from './components/AnimBackground/EngineCon
 import { LangContextProvider } from './contexts/LangContext'
 
 const strict = <React.StrictMode>
-  <BrowserRouter>
+  <HashRouter>
     <App />
-  </BrowserRouter>
+  </HashRouter>
 </React.StrictMode>
 
 const nonStrict =
-  <BrowserRouter>
+  <HashRouter>
     <App />
-  </BrowserRouter>
+  </HashRouter>
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BackgroundContextProvider>

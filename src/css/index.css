@@ -128,31 +128,7 @@
     transform: translatey(0);
   }
 }
-.icon-button {
-  color: inherit;
-  text-decoration: none;
-  padding: 1em;
-  display: inline-block;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
-  border-bottom: 2px solid transparent;
-  height: 100%;
-  width: 48px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.icon-button:hover {
-  color: var(--highlight-contrast);
-}
-.icon-button.active {
-  color: var(--highlight-contrast);
-}
-
-button.floating {
+.floating-button {
   position: fixed;
   bottom: 32px;
   width: 40px;
@@ -164,32 +140,29 @@ button.floating {
   transition: color 0.2s, border-color 0.2s;
   cursor: pointer;
 }
-button.floating:hover {
+.floating-button:hover {
   color: var(--highlight-contrast);
   border-color: var(--highlight-contrast);
 }
-button.floating.right {
+.floating-button--right {
   right: 16px;
 }
-button.floating.left {
+.floating-button--left {
   left: 16px;
 }
 
-.page-label {
+.page__label {
   font-size: 2em;
   color: var(--highlight-contrast);
 }
-
-.page-text {
+.page__text {
   width: 70%;
   width: 60%;
   font-size: 1.1em;
   line-height: 1.5em;
 }
-
-.page-watermark {
+.page__watermark {
   position: absolute;
-  z-index: -1;
   color: var(--highlight);
   font-weight: bold;
   opacity: 0.1;
@@ -200,7 +173,7 @@ button.floating.left {
   margin: 0;
 }
 
-nav.app-nav {
+.nav {
   position: fixed;
   top: 0;
   width: 100vw;
@@ -209,12 +182,20 @@ nav.app-nav {
   border-bottom: 1px solid transparent;
   transition: background-color 0.2s, border-color 0.2s;
 }
-nav.app-nav.visible {
+.nav--solid {
   background-color: var(--background);
   border-color: var(--border);
 }
-nav.app-nav button,
-nav.app-nav a {
+.nav__menu {
+  display: flex;
+  height: 48px;
+}
+@media (max-width: 993px) {
+  .nav__menu {
+    display: none;
+  }
+}
+.nav__menu__button {
   color: inherit;
   text-decoration: none;
   padding: 1em;
@@ -226,47 +207,89 @@ nav.app-nav a {
   border-bottom: 2px solid transparent;
   height: 100%;
 }
-nav.app-nav button:hover,
-nav.app-nav a:hover {
+.nav__menu__button:hover {
   color: var(--highlight-contrast);
 }
-nav.app-nav button.active,
-nav.app-nav a.active {
+.nav__menu__button.active {
   color: var(--highlight-contrast);
 }
-
-nav.app-nav.mobile .app-nav-config {
-  height: 48px;
-  right: 0.2em;
-  display: flex;
-  transition: height 0.2s;
-}
-nav.app-nav.mobile.visible .app-nav-config {
-  height: 64px;
-}
-nav.app-nav.mobile .nav-content {
-  background-color: var(--background);
-  flex-direction: column;
-}
-nav.app-nav.mobile .nav-content a {
-  text-align: center;
-}
-nav.app-nav.mobile .toggle-button {
+.nav__menu__button--margin-right {
   margin-right: auto;
 }
-
-.nav-content {
-  position: relative;
-  max-width: 900px;
-  margin: auto;
+.nav__menu__dropdown {
+  width: 100%;
   display: flex;
+  flex-direction: column;
 }
-.nav-content.centered {
+.nav__menu__dropdown__button {
+  color: inherit;
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+  text-align: center;
+}
+.nav__menu__dropdown__button:hover {
+  color: var(--highlight-contrast);
+}
+.nav__menu__dropdown__button.active {
+  color: var(--highlight-contrast);
+}
+.nav__menu__dropdown__button--margin-right {
+  margin-right: auto;
+}
+.nav__menu__dropdown--centered {
   justify-content: center;
 }
+.nav__menu__dropdown--mobile {
+  display: none;
+}
+@media (max-width: 993px) {
+  .nav__menu__dropdown--mobile {
+    display: flex;
+  }
+}
+.nav__menu--centered {
+  justify-content: center;
+}
+.nav__menu--mobile {
+  display: none;
+}
+@media (max-width: 993px) {
+  .nav__menu--mobile {
+    display: flex;
+  }
+}
 
-.skill-progress-container {
+.skill-progress {
   padding: 2em 0;
+}
+.skill-progress__label::before {
+  content: ">";
+  font-weight: bold;
+  color: var(--highlight);
+  color: var(--highlight-contrast);
+  margin-right: 0.5em;
+}
+.skill-progress__grid {
+  display: flex;
+}
+.skill-progress__grid__item {
+  border: 1px solid var(--highlight-contrast);
+  height: 4px;
+  flex: 1;
+}
+.skill-progress__grid__item--active {
+  border: 1px solid var(--highlight);
+  background-color: var(--highlight);
+}
+.skill-progress__grid__item + .skill-progress__grid__item {
+  margin-left: 0.5em;
 }
 
 .skill-progress-grid {
@@ -288,30 +311,6 @@ nav.app-nav.mobile .toggle-button {
   }
 }
 
-.skill-progress {
-  display: flex;
-}
-.skill-progress > div {
-  border: 1px solid var(--highlight-contrast);
-  height: 4px;
-  flex: 1;
-}
-.skill-progress > div.on {
-  border: 1px solid var(--highlight);
-  background-color: var(--highlight);
-}
-.skill-progress > div + div {
-  margin-left: 0.5em;
-}
-
-.skill-progress-label::before {
-  content: ">";
-  font-weight: bold;
-  color: var(--highlight);
-  color: var(--highlight-contrast);
-  margin-right: 0.5em;
-}
-
 .app-input {
   display: flex;
   flex-flow: column;
@@ -319,13 +318,17 @@ nav.app-nav.mobile .toggle-button {
 .app-input + .app-input {
   margin-top: 2.5em;
 }
-
-.input-range {
+.app-input__control {
+  height: 32px;
+  align-items: center;
+  display: flex;
+}
+.app-input__control__range {
   position: relative;
   border-top: 1px solid var(--border);
   width: 100%;
 }
-.input-range .input-handler {
+.app-input__control__range__handler {
   position: absolute;
   top: 0;
   background-color: var(--highlight);
@@ -337,26 +340,19 @@ nav.app-nav.mobile .toggle-button {
   transition: background-color 0.2s, width 0.1s, height 0.1s;
   user-select: none;
 }
-.input-range .input-handler:hover {
+.app-input__control__range__handler:hover {
   background-color: var(--highlight-contrast);
   width: 24px;
   height: 24px;
 }
-
-.input-wrapper {
-  height: 32px;
-  align-items: center;
+.app-input__info {
   display: flex;
 }
-
-.input-info {
-  display: flex;
-}
-.input-info .input-label {
+.app-input__info__label {
   margin: 0;
   padding: 0;
 }
-.input-info .input-value {
+.app-input__info__value {
   color: var(--highlight-contrast);
   margin: 0;
   padding: 0;

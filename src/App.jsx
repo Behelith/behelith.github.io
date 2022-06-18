@@ -54,7 +54,7 @@ function App() {
 
         {footer}
 
-        {scrollTopButtonVisible ? <button className="floating right fade-in" onClick={e => window.scrollTo(0, 0)}>
+        {scrollTopButtonVisible ? <button className="floating-button floating-button--right fade-in" onClick={e => window.scrollTo(0, 0)}>
           <i className="fa fa-arrow-up"></i>
         </button> : null}
 

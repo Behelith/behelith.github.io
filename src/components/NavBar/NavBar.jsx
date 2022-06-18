@@ -20,73 +20,56 @@ const NavBar = props => {
         else setNavBackgroundVisible(false)
     })
 
-
-
-    // theme buttons
-    const themeLightButton = <button className="icon-button" onClick={() => {
-        setTheme('light')
-        closeMobileNav()
-    }}> <i className="fa fa-sun" /> </button>
-
-    const themeDarkButton = <button className="icon-button" onClick={() => {
-        setTheme('dark')
-        closeMobileNav()
-    }}> <i className="fa fa-moon" /> </button>
-
-    const langButton = <button className="icon-button" onClick={() => {
+    const langButton = <button className="nav__menu__button" onClick={() => {
         langContext.toggleLang()
         closeMobileNav()
     }}>{langContext.lang.toLowerCase() == 'en' ? 'PL' : "EN"}</button>
 
 
-    const navContent = <div className="nav-content centered  fade-in">
-        <NavLink to="/">{dictionary.NAV_ABOUT[langContext.lang]}</NavLink>
-        <NavLink to="/skills" >{dictionary.NAV_SKILLS[langContext.lang]}</NavLink>
-        <NavLink to="/background-controller" >{dictionary.NAV_CONTROLS[langContext.lang]}</NavLink>
-        {/* <p>•</p> */}
-        <div className="app-nav-config ">
-            {theme == 'dark' ? themeLightButton : themeDarkButton}
-            {langButton}
-        </div>
-    </div>
-
-    const navMobileContent = (
-        <div className="nav-content centered fade-in">
-            <NavLink onClick={closeMobileNav} to="/">{dictionary.NAV_ABOUT[langContext.lang]}</NavLink>
-            <NavLink onClick={closeMobileNav} to="/skills" >{dictionary.NAV_SKILLS[langContext.lang]}</NavLink>
-            <NavLink onClick={closeMobileNav} to="/background-controller" >{dictionary.NAV_CONTROLS[langContext.lang]}</NavLink>
-        </div>)
-
-    const navMobile = <div className="app-nav-config ">
-        <button className="icon-button toggle-button"
-            onClick={() => { setMobileActive(!mobileActive) }}
-        > <i className="fa fa-bars"></i> </button>
-        {theme == 'dark' ? themeLightButton : themeDarkButton}
-        {langButton}
-    </div>
-
-    const appNavClasses = ['app-nav max fade-in']
-    const appMobileNavClasses = ['app-nav min-mid mobile fade-in']
-    if (navBackgroundVisible || mobileActive) {
-        appNavClasses.push('visible')
-        appMobileNavClasses.push('visible')
-    }
-
-    const navBar = <nav className={appNavClasses.join(' ')}>
-        {navContent}
-    </nav>
-
-    const mobileNavBar = <nav className={appMobileNavClasses.join(' ')}>
-        {navMobile}
-        {mobileActive ? navMobileContent : null}
-    </nav>
-
+    const navClasses = ['nav']
+    if (navBackgroundVisible || mobileActive) navClasses.push('nav--solid')
 
     return (
-        <>
-            {navBar}
-            {mobileNavBar}
-        </>
+        <div className={navClasses.join(' ')}>
+            <div className="nav__menu nav__menu--centered fade-in">
+                <NavLink className="nav__menu__button" to="/">{dictionary.NAV_ABOUT[langContext.lang]}</NavLink>
+                <NavLink className="nav__menu__button" to="/skills" >{dictionary.NAV_SKILLS[langContext.lang]}</NavLink>
+                <NavLink className="nav__menu__button" to="/background-controller" >{dictionary.NAV_CONTROLS[langContext.lang]}</NavLink>
+
+                {theme == 'dark' ? <button className="nav__menu__button" onClick={() => {
+                    setTheme('light')
+                }}> <i className="fa fa-sun" /> </button> : <button className="nav__menu__button" onClick={() => {
+                    setTheme('dark')
+                }}> <i className="fa fa-moon" /> </button>}
+
+                <button className="nav__menu__button" onClick={() => {
+                    langContext.toggleLang()
+                    closeMobileNav()
+                }}>{langContext.lang.toLowerCase() == 'en' ? 'PL' : "EN"}</button>
+            </div>
+
+            <div className="nav__menu nav__menu--mobile fade-in">
+                <button className="nav__menu__button nav__menu__button--margin-right "
+                    onClick={() => { setMobileActive(!mobileActive) }}
+                > <i className="fa fa-bars"></i> </button>
+                {theme == 'dark' ? <button className="nav__menu__button" onClick={() => {
+                    setTheme('light')
+                    closeMobileNav()
+                }}> <i className="fa fa-sun" /> </button> : <button className="nav__menu__button" onClick={() => {
+                    setTheme('dark')
+                    closeMobileNav()
+                }}> <i className="fa fa-moon" /> </button>}
+                {langButton}
+            </div>
+
+            {mobileActive ? (
+                <div className="nav__menu__dropdown nav__menu__dropdown--mobile fade-in">
+                    <NavLink className="nav__menu__dropdown__button" onClick={closeMobileNav} to="/">{dictionary.NAV_ABOUT[langContext.lang]}</NavLink>
+                    <NavLink className="nav__menu__dropdown__button" onClick={closeMobileNav} to="/skills" >{dictionary.NAV_SKILLS[langContext.lang]}</NavLink>
+                    <NavLink className="nav__menu__dropdown__button" onClick={closeMobileNav} to="/background-controller" >{dictionary.NAV_CONTROLS[langContext.lang]}</NavLink>
+                </div>
+            ) : null}
+        </div>
     );
 }
 

@@ -25,15 +25,6 @@
   }
 }
 
-.icon-button {
-  @include regular;
-  width: 48px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @mixin link {
   color: colors.$highlight;
   transition: color 0.2s;
@@ -44,7 +35,7 @@
   }
 }
 
-button.floating {
+.floating-button {
   position: fixed;
   bottom: 32px;
 
@@ -64,11 +55,11 @@ button.floating {
     border-color: colors.$highlight-contrast;
   }
 
-  &.right {
+  &--right {
     right: 16px;
   }
 
-  &.left {
+  &--left {
     left: 16px;
   }
 }

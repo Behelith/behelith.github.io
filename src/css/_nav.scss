@@ -1,64 +1,76 @@
 @use "./colors";
+@use "./media";
 @use "./button-styles";
 
-nav.app-nav {
+.nav {
   position: fixed;
   top: 0;
   width: 100vw;
 
   z-index: 5;
-  // padding: 0.8em 0;
   color: colors.$text;
   border-bottom: 1px solid transparent;
 
   transition: background-color 0.2s, border-color 0.2s;
 
-  &.visible {
+  &--solid {
     background-color: colors.$background;
     border-color: colors.$border;
   }
 
-  button,
-  a {
-    @include button-styles.regular;
-  }
-}
-
-nav.app-nav.mobile {
-  .app-nav-config {
+  &__menu {
+    display: flex;
     height: 48px;
 
-    right: 0.2em;
-    display: flex;
-
-    transition: height 0.2s;
-  }
-
-  &.visible .app-nav-config {
-    height: 64px;
-  }
-
-  .nav-content {
-    background-color: colors.$background;
-    flex-direction: column;
-
-    a {
-      text-align: center;
+    @include media.min-mid {
+      display: none;
     }
-  }
 
-  .toggle-button {
-    margin-right: auto;
-  }
-}
+    &__button {
+      @include button-styles.regular;
 
-.nav-content {
-  position: relative;
-  max-width: 900px;
-  margin: auto;
-  display: flex;
+      &--margin-right {
+        margin-right: auto;
+      }
+    }
 
-  &.centered {
-    justify-content: center;
+    &__dropdown {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      &__button {
+        @include button-styles.regular;
+        text-align: center;
+
+        &--margin-right {
+          margin-right: auto;
+        }
+      }
+
+      &--centered {
+        justify-content: center;
+      }
+
+      &--mobile {
+        display: none;
+
+        @include media.min-mid {
+          display: flex;
+        }
+      }
+    }
+
+    &--centered {
+      justify-content: center;
+    }
+
+    &--mobile {
+      display: none;
+
+      @include media.min-mid {
+        display: flex;
+      }
+    }
   }
 }

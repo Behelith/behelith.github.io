@@ -1,8 +1,37 @@
 @use "./colors";
 @use "./media";
 
-.skill-progress-container {
+.skill-progress {
   padding: 2em 0;
+
+  &__label {
+    &::before {
+      content: ">";
+      font-weight: bold;
+      color: colors.$highlight;
+      color: colors.$highlight-contrast;
+      margin-right: 0.5em;
+    }
+  }
+
+  &__grid {
+    display: flex;
+
+    &__item {
+      border: 1px solid colors.$highlight-contrast;
+      height: 4px;
+      flex: 1;
+
+      &--active {
+        border: 1px solid colors.$highlight;
+        background-color: colors.$highlight;
+      }
+
+      & + & {
+        margin-left: 0.5em;
+      }
+    }
+  }
 }
 
 .skill-progress-grid {
@@ -19,35 +48,5 @@
   @include media.max {
     grid-column-gap: 5em;
     grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-.skill-progress {
-  display: flex;
-
-  & > div {
-    border: 1px solid colors.$highlight-contrast;
-    height: 4px;
-    flex: 1;
-    // display: inline-block;
-
-    &.on {
-      border: 1px solid colors.$highlight;
-      background-color: colors.$highlight;
-    }
-
-    & + div {
-      margin-left: 0.5em;
-    }
-  }
-}
-
-.skill-progress-label {
-  &::before {
-    content: ">";
-    font-weight: bold;
-    color: colors.$highlight;
-    color: colors.$highlight-contrast;
-    margin-right: 0.5em;
   }
 }

@@ -129,14 +129,14 @@ const RangeInput = props => {
 
     return (
         <div className="app-input">
-            <div ref={refWrapper} className="input-wrapper">
-                <div className="input-range">
-                    <div ref={refHandler} className="input-handler"></div>
+            <div ref={refWrapper} className="app-input__control">
+                <div className="app-input__control__range">
+                    <div ref={refHandler} className="app-input__control__range__handler"></div>
                 </div>
             </div>
-            <div className="input-info">
-                {props.label ? <p className="input-label">{props.label}</p> : null}
-                <p className="input-value">{
+            <div className="app-input__info">
+                {props.label ? <p className="app-input__info__label">{props.label}</p> : null}
+                <p className="app-input__info__value">{
                     value % 1 == 0 ? value : parseFloat(value).toFixed(2)
                 }</p>
             </div>
